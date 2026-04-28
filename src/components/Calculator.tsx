@@ -11,7 +11,7 @@ export function Calculator() {
     <div className="flex flex-col gap-8">
       <div
         role="tablist"
-        className="inline-flex w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] p-1 text-sm"
+        className="inline-flex w-full max-w-full overflow-x-auto rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] p-1 text-sm sm:w-fit"
       >
         {(
           [
@@ -24,7 +24,7 @@ export function Calculator() {
             role="tab"
             aria-selected={mode === tab.id}
             onClick={() => setMode(tab.id)}
-            className={`rounded-full px-3.5 py-1.5 transition-colors ${
+            className={`flex-1 whitespace-nowrap rounded-full px-3.5 py-1.5 transition-colors sm:flex-none ${
               mode === tab.id
                 ? "bg-[var(--color-foreground)] text-[var(--color-background)]"
                 : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
@@ -127,8 +127,8 @@ function BettingCalculator() {
   }, [pot, bet]);
 
   return (
-    <section className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+    <section className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-8">
+      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6">
         <h2 className="text-base font-semibold">Inputs</h2>
         <NumberField
           label="Pot before bet"
@@ -213,15 +213,15 @@ function OutsCalculator() {
   }, [outs, streets]);
 
   return (
-    <section className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+    <section className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-8">
+      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6">
         <h2 className="text-base font-semibold">Inputs</h2>
         <NumberField label="Number of outs" value={outs} onChange={setOuts} step={1} />
         <div className="flex flex-col gap-1.5">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-muted)]">
             Cards to come
           </span>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             {([1, 2] as const).map((n) => (
               <button
                 key={n}
@@ -232,7 +232,11 @@ function OutsCalculator() {
                     : "border-[var(--color-border)] hover:bg-[var(--color-surface-2)]"
                 }`}
               >
-                {n} card{n === 2 ? "s" : ""} {n === 1 ? "(turn → river)" : "(all-in flop)"}
+                {n} card{n === 2 ? "s" : ""}
+                <span className="text-[var(--color-muted)]">
+                  {" "}
+                  {n === 1 ? "(turn → river)" : "(all-in flop)"}
+                </span>
               </button>
             ))}
           </div>

@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
+import GithubSlugger from "github-slugger";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
@@ -55,21 +56,21 @@ export async function loadLessonMarkdown(file: string): Promise<RenderedLesson> 
   const file_node = await processor.process(parsed.content);
   let html = String(file_node);
   html = html.replace(SUIT_REGEX, '<span class="suit-red">$1</span>');
+  // Wrap raw tables in a horizontally scrollable container so wide range
+  // charts don't overflow the page on small screens.
+  html = html.replace(
+    /<table>([\s\S]*?)<\/table>/g,
+    '<div class="table-scroll"><table>$1</table></div>',
+  );
 
   const toc = extractToc(parsed.content);
   return { html, frontmatter: parsed.data as Frontmatter, raw: parsed.content, toc };
 }
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[`*_]/g, "")
-    .replace(/[^\w\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
-
 function extractToc(markdown: string): TocEntry[] {
+  // Use GithubSlugger to match the deduplication behaviour that
+  // rehype-slug applies to the rendered HTML, so anchor links match.
+  const slugger = new GithubSlugger();
   const lines = markdown.split("\n");
   const entries: TocEntry[] = [];
   let inCodeFence = false;
@@ -83,7 +84,7 @@ function extractToc(markdown: string): TocEntry[] {
     if (!match) continue;
     const depth = match[1].length;
     const text = match[2].replace(/`/g, "").trim();
-    entries.push({ id: slugify(text), text, depth });
+    entries.push({ id: slugger.slug(text), text, depth });
   }
   return entries;
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LESSONS } from "@/lib/lessons";
+import { Container } from "@/components/Container";
 
 export default function Home() {
   const totalMinutes = LESSONS.reduce((acc, l) => acc + l.estimatedMinutes, 0);
@@ -8,25 +9,27 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <section className="border-b border-[var(--color-border)]">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="flex flex-col gap-8">
+        <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-24">
+          <div className="flex flex-col gap-6 sm:gap-8">
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-muted)]">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-              Microstakes No-Limit Hold&apos;em · {LESSONS.length} lessons · ≈{Math.round(totalMinutes / 10) * 10} min
+              <span className="hidden sm:inline">Microstakes No-Limit Hold&apos;em · </span>
+              {LESSONS.length} lessons · ≈{Math.round(totalMinutes / 10) * 10} min
             </div>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              Learn poker from <span className="text-[var(--color-muted)]">first principles.</span>
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              Learn poker from{" "}
+              <span className="text-[var(--color-muted)]">first principles.</span>
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-[var(--color-muted)]">
+            <p className="max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
               A rigorous, math-first curriculum that builds No-Limit Hold&apos;em from
               counting outs all the way up to a real-time decision stack. Every lesson
               has worked examples and an interactive quiz so you can verify
               understanding before moving on.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/learn/introduction"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-foreground)] px-5 py-3 text-sm font-medium text-[var(--color-background)] transition-opacity hover:opacity-90"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-foreground)] px-5 py-3 text-sm font-medium text-[var(--color-background)] transition-opacity hover:opacity-90"
               >
                 Start with the introduction
                 <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
@@ -35,7 +38,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/learn"
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] px-5 py-3 text-sm font-medium text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-surface-2)]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border)] px-5 py-3 text-sm font-medium text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-surface-2)]"
               >
                 Browse the curriculum
               </Link>
@@ -72,7 +75,7 @@ export default function Home() {
                       {lesson.subtitle}
                     </span>
                   </span>
-                  <span className="text-[var(--color-muted)] transition-colors group-hover:text-[var(--color-foreground)]">
+                  <span className="hidden text-[var(--color-muted)] transition-colors group-hover:text-[var(--color-foreground)] sm:block">
                     <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
                       <path d="M6 3l5 5-5 5-1-1 4-4-4-4z" />
                     </svg>
@@ -87,16 +90,16 @@ export default function Home() {
               View all {LESSONS.length} lessons →
             </Link>
           </div>
-        </div>
+        </Container>
       </section>
 
       <section className="border-b border-[var(--color-border)]">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="mb-12 max-w-3xl">
+        <Container className="py-12 sm:py-16 lg:py-20">
+          <div className="mb-8 max-w-3xl sm:mb-12">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
               How it works
             </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight">
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
               Read, work an example, prove you got it.
             </h2>
             <p className="mt-3 text-[var(--color-muted)]">
@@ -121,17 +124,19 @@ export default function Home() {
               description="Choice, multi-select and numeric questions with detailed explanations. No login required — just check your answers and move on."
             />
           </div>
-        </div>
+        </Container>
       </section>
 
       <section>
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <Container className="py-12 sm:py-16 lg:py-20">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-10">
             <div className="max-w-xl">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                 Curriculum
               </p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight">The ten parts</h2>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                The ten parts
+              </h2>
               <p className="mt-2 text-[var(--color-muted)]">
                 Each part assumes only what came before it. Skip ahead at your own
                 risk — they compound.
@@ -152,7 +157,9 @@ export default function Home() {
                 className="group flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-colors hover:border-[var(--color-border-strong)]"
               >
                 <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted)]">
-                  <span className="font-mono">{lesson.order.toString().padStart(2, "0")}</span>
+                  <span className="font-mono">
+                    {lesson.order.toString().padStart(2, "0")}
+                  </span>
                   <span>{lesson.partLabel}</span>
                   <span className="ml-auto rounded-full bg-[var(--color-surface-2)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-muted)]">
                     {lesson.level}
@@ -171,7 +178,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
     </main>
   );

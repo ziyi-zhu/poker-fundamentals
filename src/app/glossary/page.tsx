@@ -1,6 +1,9 @@
+import { Container } from "@/components/Container";
+
 export const metadata = {
   title: "Glossary",
-  description: "Quick reference for the abbreviations and terms used throughout the curriculum.",
+  description:
+    "Quick reference for the abbreviations and terms used throughout the curriculum.",
 };
 
 type Entry = {
@@ -36,28 +39,34 @@ const ENTRIES: Entry[] = [
 
 export default function GlossaryPage() {
   return (
-    <main className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
-      <header className="mb-10 max-w-2xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-          Reference
-        </p>
-        <h1 className="mt-2 text-4xl font-semibold tracking-tight">Glossary</h1>
-        <p className="mt-3 text-[var(--color-muted)]">
-          A flat list of every abbreviation and term used across the lessons. Reach
-          for it whenever a formula or label needs a refresher.
-        </p>
-      </header>
-      <dl className="grid gap-3 sm:grid-cols-2">
-        {ENTRIES.map((entry) => (
-          <div
-            key={entry.term}
-            className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
-          >
-            <dt className="font-semibold">{entry.term}</dt>
-            <dd className="mt-1 text-sm text-[var(--color-muted)]">{entry.definition}</dd>
-          </div>
-        ))}
-      </dl>
+    <main>
+      <Container className="py-10 sm:py-14">
+        <header className="mb-8 max-w-2xl sm:mb-10">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+            Reference
+          </p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Glossary
+          </h1>
+          <p className="mt-3 text-[var(--color-muted)]">
+            A flat list of every abbreviation and term used across the lessons.
+            Reach for it whenever a formula or label needs a refresher.
+          </p>
+        </header>
+        <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {ENTRIES.map((entry) => (
+            <div
+              key={entry.term}
+              className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+            >
+              <dt className="font-semibold">{entry.term}</dt>
+              <dd className="mt-1 text-sm text-[var(--color-muted)]">
+                {entry.definition}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Container>
     </main>
   );
 }
