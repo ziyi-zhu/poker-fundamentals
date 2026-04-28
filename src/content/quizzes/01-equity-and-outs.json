@@ -1,0 +1,74 @@
+{
+  "title": "Counting outs & estimating equity",
+  "description": "Six questions covering out counting, dirty outs, and the Rule of 2 & 4.",
+  "questions": [
+    {
+      "id": "outs-1",
+      "type": "numeric",
+      "concept": "Counting outs",
+      "prompt": "You hold 9♠ 8♠ on K♠ 7♥ 6♣. How many clean outs do you have to make at least a straight on the turn?",
+      "answer": 8,
+      "tolerance": 0,
+      "explanation": "Open-ended straight draw: any 5 (4 cards) or any 10 (4 cards) makes a straight. 4 + 4 = 8 outs. The flush is irrelevant here because only one spade is in your hand."
+    },
+    {
+      "id": "outs-2",
+      "type": "numeric",
+      "concept": "Combo draws",
+      "prompt": "You hold A♠ 5♠ on K♠ 4♠ 3♥. How many outs do you have to a flush or wheel straight without double counting?",
+      "answer": 12,
+      "tolerance": 0,
+      "explanation": "Flush draw is 9 outs (the remaining spades). A 2 of any suit makes the wheel — but the 2♠ is already in your flush outs. The clean extra outs are the 2♥, 2♦, 2♣. 9 + 3 = 12."
+    },
+    {
+      "id": "outs-3",
+      "type": "choice",
+      "concept": "Rule of 2 & 4",
+      "prompt": "You're on the flop with 9 outs and getting all-in for the rest of the hand. Which figure best approximates your equity to win at showdown?",
+      "choices": [
+        { "id": "a", "text": "9% (Rule of 1)" },
+        { "id": "b", "text": "18% (Rule of 2)" },
+        { "id": "c", "text": "36% (Rule of 4)" },
+        { "id": "d", "text": "54% (Rule of 6)" }
+      ],
+      "answer": "c",
+      "explanation": "Two cards to come and you're paying once → Rule of 4: 4 × 9 ≈ 36%. The exact value is ≈35.0%, very close."
+    },
+    {
+      "id": "outs-4",
+      "type": "choice",
+      "concept": "Rule of 2 & 4 caveats",
+      "prompt": "When does the Rule of 4 over-estimate enough that you should switch to (3n + 8)?",
+      "choices": [
+        { "id": "a", "text": "Always — Rule of 4 is never accurate." },
+        { "id": "b", "text": "When n > 8 outs, two cards to come." },
+        { "id": "c", "text": "When you have a single overcard." },
+        { "id": "d", "text": "Only on monotone boards." }
+      ],
+      "answer": "b",
+      "explanation": "For n > 8 the Rule of 4 over-counts cards that could appear on both turn and river. Phil Gordon's (3n + 8) refinement is much closer to the exact value above 8 outs."
+    },
+    {
+      "id": "outs-5",
+      "type": "truefalse",
+      "concept": "Single price",
+      "prompt": "If villain bets the flop and you suspect they will bet again on the turn, you should still apply the Rule of 4 to your current draw to compute your call equity.",
+      "answer": false,
+      "explanation": "The Rule of 4 only applies when you pay a single price to see both cards (e.g. all-in on the flop). With more betting to come, apply the Rule of 2 per street so that the future decision is priced in."
+    },
+    {
+      "id": "outs-6",
+      "type": "multi",
+      "concept": "Dirty outs",
+      "prompt": "Which of the following are reasons to discount or remove an out?",
+      "choices": [
+        { "id": "a", "text": "The card completes your flush but pairs the board, plausibly giving villain a full house." },
+        { "id": "b", "text": "The card is the same colour as your hole cards." },
+        { "id": "c", "text": "The card completes your gutshot but also puts a four-flush on the board against a strong bettor." },
+        { "id": "d", "text": "The card improves your hand to top pair, top kicker." }
+      ],
+      "answer": ["a", "c"],
+      "explanation": "Dirty outs improve your hand but also improve villain to a likely better hand. Pairing boards and four-flush rivers are the canonical examples. Hand colour is irrelevant; TPTK is an *improvement*, not a dirty out."
+    }
+  ]
+}

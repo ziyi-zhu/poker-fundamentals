@@ -1,0 +1,71 @@
+{
+  "title": "Introduction",
+  "description": "Five quick questions on GTO vs. exploit and notation. Get all five right before moving to Part 1.",
+  "questions": [
+    {
+      "id": "intro-1",
+      "type": "choice",
+      "concept": "GTO definition",
+      "prompt": "Which of the following best describes Game Theory Optimal (GTO) play?",
+      "choices": [
+        { "id": "a", "text": "A strategy that maximally exploits any opponent." },
+        { "id": "b", "text": "A mixed strategy that is unexploitable in theory — the Nash equilibrium of the game." },
+        { "id": "c", "text": "The strategy used by the player with the largest stack." },
+        { "id": "d", "text": "A strategy that always folds to large bets." }
+      ],
+      "answer": "b",
+      "explanation": "GTO is the Nash equilibrium: a mixed strategy such that no opponent can win money against it in expectation. Crucially, it is defensive — it does not maximally exploit known leaks."
+    },
+    {
+      "id": "intro-2",
+      "type": "choice",
+      "concept": "Microstakes population",
+      "prompt": "At microstakes the population systematically deviates from GTO. Which set of deviations is most accurate?",
+      "choices": [
+        { "id": "a", "text": "Over-bluffs and under-calls." },
+        { "id": "b", "text": "Under-bluffs and over-calls." },
+        { "id": "c", "text": "Bluffs and calls at exactly the GTO frequency." },
+        { "id": "d", "text": "Plays randomly with no statistical bias." }
+      ],
+      "answer": "b",
+      "explanation": "The microstakes population over-calls (especially on the river) and under-bluffs. The correct exploit is to value-bet more and bluff less than GTO would suggest."
+    },
+    {
+      "id": "intro-3",
+      "type": "choice",
+      "concept": "Hand notation",
+      "prompt": "Which set of hands does `A2s+` represent?",
+      "choices": [
+        { "id": "a", "text": "All suited aces from A2s through AKs." },
+        { "id": "b", "text": "All offsuit aces from A2 through AK." },
+        { "id": "c", "text": "Only A2 suited." },
+        { "id": "d", "text": "All hands containing at least one ace." }
+      ],
+      "answer": "a",
+      "explanation": "`A2s+` denotes the suited-ace block from A2s up to AKs — twelve hands total."
+    },
+    {
+      "id": "intro-4",
+      "type": "truefalse",
+      "concept": "Strategic posture",
+      "prompt": "If a strategy is unexploitable (GTO), it is also the highest-EV strategy against any specific opponent.",
+      "answer": false,
+      "explanation": "Unexploitability ≠ maximum EV. GTO is a defensive baseline; against a known-leaky opponent, deliberate exploitative deviation extracts more EV."
+    },
+    {
+      "id": "intro-5",
+      "type": "multi",
+      "concept": "Notation",
+      "prompt": "Which of the following symbols are defined in the curriculum's notation table?",
+      "choices": [
+        { "id": "p", "text": "P — pot before the current bet" },
+        { "id": "b", "text": "B — the bet size" },
+        { "id": "n", "text": "n — number of outs" },
+        { "id": "k", "text": "K — kicker strength index" },
+        { "id": "spr", "text": "SPR — stack-to-pot ratio" }
+      ],
+      "answer": ["p", "b", "n", "spr"],
+      "explanation": "P, B, n, and SPR are all defined. There is no curriculum-wide K symbol — kicker strength is informal."
+    }
+  ]
+}

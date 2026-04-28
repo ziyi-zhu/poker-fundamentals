@@ -1,0 +1,79 @@
+{
+  "title": "Value betting",
+  "description": "Six questions on the by-worse criterion, sizing tiers, and geometric three-street planning.",
+  "questions": [
+    {
+      "id": "val-1",
+      "type": "choice",
+      "concept": "By-worse criterion",
+      "prompt": "Which definition of a value bet matches the curriculum?",
+      "choices": [
+        { "id": "a", "text": "Any bet made on the river." },
+        { "id": "b", "text": "A bet that wins the pot at least 50% of the time when called." },
+        { "id": "c", "text": "A bet where you expect more *worse* hands than *better* hands to call." },
+        { "id": "d", "text": "A bet sized to fold out all weaker hands." }
+      ],
+      "answer": "c",
+      "explanation": "The by-worse criterion: bet for value when the calling range contains more worse hands than better hands. If only better hands call, you're value-owning yourself."
+    },
+    {
+      "id": "val-2",
+      "type": "choice",
+      "concept": "Sizing hierarchy",
+      "prompt": "Which sizing tier is appropriate for a thin value bet (e.g. weak top pair on a coordinated turn)?",
+      "choices": [
+        { "id": "a", "text": "Overbet 1.5–2× pot." },
+        { "id": "b", "text": "Pot-sized bet." },
+        { "id": "c", "text": "25–40% pot." },
+        { "id": "d", "text": "Always check thin value." }
+      ],
+      "answer": "c",
+      "explanation": "Thin value uses 25–40% to keep wide weak ranges in and minimise loss to raises from better. Larger sizings fold the entire range you wanted to charge."
+    },
+    {
+      "id": "val-3",
+      "type": "numeric",
+      "concept": "Geometric sizing",
+      "prompt": "100bb effective in a 3-bet pot at SPR ≈ 5. What is the per-street bet (as a fraction of pot, 2 decimals) needed to get all-in over three streets?",
+      "answer": 0.61,
+      "tolerance": 0.05,
+      "explanation": "(1 + 2·5)^(1/3) - 1, all over 2 = (11^(1/3) - 1)/2 ≈ (2.224 - 1)/2 ≈ 0.61. Roughly 60% pot per street."
+    },
+    {
+      "id": "val-4",
+      "type": "truefalse",
+      "concept": "Overbets",
+      "prompt": "An overbet on the river (1.5×–2× pot) is correct when you hold a TPTK in a single-raised pot, because TPTK is a clear value hand.",
+      "answer": false,
+      "explanation": "Overbets target villain's bluff-catcher range and require *nut advantage*. TPTK is one pair — it gets raised by better and folds out worse. Use a standard value sizing instead."
+    },
+    {
+      "id": "val-5",
+      "type": "choice",
+      "concept": "SRP geometric reality",
+      "prompt": "Why is a three-street geometric stack-off rarely the right plan in a single-raised pot at 100bb?",
+      "choices": [
+        { "id": "a", "text": "SPR ≈ 17, so geometric sizing requires ~115% pot per street — overbets villain's range will not pay." },
+        { "id": "b", "text": "SRPs always go to showdown with no betting." },
+        { "id": "c", "text": "100bb is too shallow for geometric play." },
+        { "id": "d", "text": "Geometric sizing only applies preflop." }
+      ],
+      "answer": "a",
+      "explanation": "At SPR ≈ 17 the geometric size is ~1.13× pot, which is an overbet on every street. Villain's range simply won't pay this — you have to abandon the stack-off plan or use the river jam as the overbet."
+    },
+    {
+      "id": "val-6",
+      "type": "multi",
+      "concept": "Sizing → calling range",
+      "prompt": "Which questions should you ask before choosing a value bet size? Select all that apply.",
+      "choices": [
+        { "id": "a", "text": "Which calling range am I targeting?" },
+        { "id": "b", "text": "How does this size compare to my bluff frequency?" },
+        { "id": "c", "text": "How committed am I given the SPR?" },
+        { "id": "d", "text": "Is the wind direction favouring small bets today?" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explanation": "Calling range, bluff/value balance, and commitment via SPR all matter. Wind direction does not."
+    }
+  ]
+}

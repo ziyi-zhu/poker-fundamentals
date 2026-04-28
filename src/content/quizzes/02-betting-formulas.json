@@ -1,0 +1,95 @@
+{
+  "title": "Pot odds, α, MDF, SPR",
+  "description": "Eight questions on the four core betting formulas. Use a calculator only if you must.",
+  "questions": [
+    {
+      "id": "bet-1",
+      "type": "numeric",
+      "concept": "Pot odds",
+      "prompt": "Villain bets 50bb into a 100bb pot. To call profitably, what minimum equity do you need (in %)?",
+      "answer": 33.33,
+      "tolerance": 0.5,
+      "unit": "%",
+      "explanation": "Required equity = C / (P + C) = 50 / (100 + 50) = 33.33%. Anything above this and the call is +EV against villain's range."
+    },
+    {
+      "id": "bet-2",
+      "type": "numeric",
+      "concept": "Alpha",
+      "prompt": "You river-bluff 30bb into a 60bb pot. What is α (in %), the fold frequency required to break even?",
+      "answer": 33.33,
+      "tolerance": 0.5,
+      "unit": "%",
+      "explanation": "α = B / (P + B) = 30 / (60 + 30) = 33.33%. Note this is the same formula as pot odds when C = B."
+    },
+    {
+      "id": "bet-3",
+      "type": "numeric",
+      "concept": "MDF",
+      "prompt": "Facing a 75% pot bet, what is the defender's MDF (in %)?",
+      "answer": 57.14,
+      "tolerance": 0.5,
+      "unit": "%",
+      "explanation": "MDF = P / (P + B). With B = 0.75P, MDF = 1 / 1.75 ≈ 57.14%. Below this share of continues, opponent profits with any two cards."
+    },
+    {
+      "id": "bet-4",
+      "type": "choice",
+      "concept": "Pot odds vs alpha",
+      "prompt": "Which statement about pot odds and α is correct?",
+      "choices": [
+        { "id": "a", "text": "Pot odds and α are different formulas; α uses the final pot in the denominator." },
+        { "id": "b", "text": "Pot odds is for the caller; α is for the bluffer; they share the formula B / (P + B) when C = B." },
+        { "id": "c", "text": "α is always larger than pot odds because the bluffer is risking more." },
+        { "id": "d", "text": "α only applies preflop." }
+      ],
+      "answer": "b",
+      "explanation": "When the call equals the bet, both reduce to B / (P + B). The number means different things — required equity vs required fold rate — but the algebra is identical."
+    },
+    {
+      "id": "bet-5",
+      "type": "truefalse",
+      "concept": "MDF interpretation",
+      "prompt": "MDF is the equity threshold at which a defender should call. If they have less equity than MDF, they should fold.",
+      "answer": false,
+      "explanation": "MDF is a *frequency* threshold, not an equity threshold. It says what fraction of the *range* must continue, assuming GTO bluffing by villain. Equity-based calling is governed by pot odds, not MDF."
+    },
+    {
+      "id": "bet-6",
+      "type": "numeric",
+      "concept": "SPR",
+      "prompt": "100bb effective. CO opens 2.5bb, BB 3-bets to 9bb, CO calls. Compute the SPR at the start of the flop (round to 1 decimal).",
+      "answer": 4.9,
+      "tolerance": 0.2,
+      "explanation": "Flop pot = 9 + 9 + 0.5 (SB dead) = 18.5bb. Remaining effective stack ≈ 91bb. SPR ≈ 91 / 18.5 ≈ 4.9."
+    },
+    {
+      "id": "bet-7",
+      "type": "choice",
+      "concept": "SPR commitment",
+      "prompt": "At which SPR is top pair / strong overpair generally committing in the absence of further reads?",
+      "choices": [
+        { "id": "a", "text": "SPR > 13 — deeper means more chances to extract value." },
+        { "id": "b", "text": "SPR 2–4 — shallow enough that two pot-sized bets get stacks in." },
+        { "id": "c", "text": "SPR < 0.5 — only when both players are basically pot-committed." },
+        { "id": "d", "text": "SPR doesn't affect commitment for one-pair hands." }
+      ],
+      "answer": "b",
+      "explanation": "At SPR 2–4 the pot is shallow enough that a few normal-sized bets get all the money in. Top pair / overpair / strong draws are usually committing in this range."
+    },
+    {
+      "id": "bet-8",
+      "type": "multi",
+      "concept": "Bet size table",
+      "prompt": "Which entries from the bet-size summary table are correct? (Select all that apply.)",
+      "choices": [
+        { "id": "a", "text": "1/2 pot bet → caller needs 33.3% equity, defender's MDF 66.7%." },
+        { "id": "b", "text": "Pot-sized bet → caller needs 50% equity, defender's MDF 50%." },
+        { "id": "c", "text": "2× pot overbet → caller needs 60% equity, defender's MDF 40%." },
+        { "id": "d", "text": "1/3 pot bet → caller needs 25% equity, defender's MDF 75%." }
+      ],
+      "answer": ["a", "b", "d"],
+      "explanation": "The 2× overbet entry is wrong: caller needs 66.7% equity, defender's MDF is 33.3%. The other three rows match the table."
+    }
+  ]
+}

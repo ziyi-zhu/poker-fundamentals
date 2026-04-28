@@ -1,0 +1,84 @@
+{
+  "title": "GTO preflop ranges",
+  "description": "Six questions on opening, 3-betting, and sizing decisions preflop.",
+  "questions": [
+    {
+      "id": "pre-1",
+      "type": "choice",
+      "concept": "Position",
+      "prompt": "In a 6-max game, the player who acts first preflop after the cards are dealt sits in which seat?",
+      "choices": [
+        { "id": "a", "text": "Button (BTN)" },
+        { "id": "b", "text": "Cutoff (CO)" },
+        { "id": "c", "text": "Lojack (LJ)" },
+        { "id": "d", "text": "Big Blind (BB)" }
+      ],
+      "answer": "c",
+      "explanation": "In 6-max, the order is LJ → HJ → CO → BTN → SB → BB. LJ acts first preflop (after blinds are posted)."
+    },
+    {
+      "id": "pre-2",
+      "type": "choice",
+      "concept": "RFI ranges",
+      "prompt": "Approximately what fraction of hands does a solver-derived BTN RFI range play in 6-max at 100bb?",
+      "choices": [
+        { "id": "a", "text": "10–15%" },
+        { "id": "b", "text": "20–25%" },
+        { "id": "c", "text": "43–48%" },
+        { "id": "d", "text": "70–80%" }
+      ],
+      "answer": "c",
+      "explanation": "Modern solver BTN RFI sits around 43–48% — the BTN's positional advantage justifies a wide range. UTG is the tightest, around 10–12% in full ring."
+    },
+    {
+      "id": "pre-3",
+      "type": "choice",
+      "concept": "3-bet sizing",
+      "prompt": "Default 3-bet sizing when you are out of position is roughly:",
+      "choices": [
+        { "id": "a", "text": "2× the open." },
+        { "id": "b", "text": "3× the open." },
+        { "id": "c", "text": "4× the open." },
+        { "id": "d", "text": "10bb flat regardless of open size." }
+      ],
+      "answer": "c",
+      "explanation": "Standard guidance: 3× IP, 4× OOP. The larger OOP size charges callers more, compensating for the positional disadvantage."
+    },
+    {
+      "id": "pre-4",
+      "type": "choice",
+      "concept": "Polarised vs linear",
+      "prompt": "Which range construction is most appropriate when 3-betting against microstakes calling stations?",
+      "choices": [
+        { "id": "a", "text": "Polarised — mixing premiums with bluffs like A5s." },
+        { "id": "b", "text": "Linear / merged — TT+, AQo+, AJs+, KQs only." },
+        { "id": "c", "text": "Limp behind to keep the pot small." },
+        { "id": "d", "text": "3-bet 100% of hands to maximise fold equity." }
+      ],
+      "answer": "b",
+      "explanation": "Stations don't fold to 3-bets often enough for bluff combos to be +EV. Use a merged range of value hands that simply want to play a bigger pot as a favourite."
+    },
+    {
+      "id": "pre-5",
+      "type": "truefalse",
+      "concept": "SB strategy",
+      "prompt": "Modern solver play from the SB is mostly raise-or-fold; flatting an open from the BTN is rarely the best option.",
+      "answer": true,
+      "explanation": "Calling from the SB leaves you OOP vs the BB with a capped range. Solver outputs almost always prefer a raise-or-fold strategy from the SB, with 3-bets going wide."
+    },
+    {
+      "id": "pre-6",
+      "type": "multi",
+      "concept": "Open sizing adjustments",
+      "prompt": "You are in the CO. Which of the following are valid reasons to size your open above 2.5bb?",
+      "choices": [
+        { "id": "a", "text": "There are two limpers in front of you." },
+        { "id": "b", "text": "The BB is a calling station who pays off thin value." },
+        { "id": "c", "text": "The BTN is a tight reg who only calls premiums." },
+        { "id": "d", "text": "You picked up the table average's tightest 3-bet stat." }
+      ],
+      "answer": ["a", "b"],
+      "explanation": "Add ~1bb per limper to charge them, and size up against stations to extract value. Tight BTN regs don't justify a larger size — if anything, they justify smaller opens to steal cheaply."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "title": "C-betting by texture",
+  "description": "Six questions on flop textures, range advantage, and sizing.",
+  "questions": [
+    {
+      "id": "tex-1",
+      "type": "choice",
+      "concept": "Range advantage",
+      "prompt": "Which board most strongly favours the preflop raiser in a single-raised pot?",
+      "choices": [
+        { "id": "a", "text": "6♠ 5♥ 4♣ (low connected rainbow)" },
+        { "id": "b", "text": "K♥ 7♣ 2♠ (dry high-card rainbow)" },
+        { "id": "c", "text": "9♣ 8♥ 7♦ (mid connected)" },
+        { "id": "d", "text": "A♥ K♥ 7♥ (monotone)" }
+      ],
+      "answer": "b",
+      "explanation": "Dry K-high rainbow is the prototypical raiser-favoured board. The raiser holds many more KX, pocket pairs, and overcards than the caller. Range-bet small at high frequency."
+    },
+    {
+      "id": "tex-2",
+      "type": "choice",
+      "concept": "Sizing for range advantage",
+      "prompt": "When you have a clear range advantage on a dry board, the recommended c-bet sizing is:",
+      "choices": [
+        { "id": "a", "text": "Pot-sized — pile money in." },
+        { "id": "b", "text": "1.5× pot overbet — maximise fold equity." },
+        { "id": "c", "text": "25–33% pot range bet — charge the whole pot a small amount." },
+        { "id": "d", "text": "All-in — apply maximum pressure." }
+      ],
+      "answer": "c",
+      "explanation": "Range advantage favours small, high-frequency bets so the equity edge compounds across the wide range. Big polarised bets are the right tool only when you have *nut* advantage on a wet board."
+    },
+    {
+      "id": "tex-3",
+      "type": "choice",
+      "concept": "3-bet pot c-bet",
+      "prompt": "In a 3-bet pot IP at 100bb effective on a dry K-high board, your typical c-bet frequency at 33% pot should be approximately:",
+      "choices": [
+        { "id": "a", "text": "20–30%" },
+        { "id": "b", "text": "50–60%" },
+        { "id": "c", "text": "85–95%+" },
+        { "id": "d", "text": "Only with the nuts" }
+      ],
+      "answer": "c",
+      "explanation": "In 3BPs the raiser's range is much narrower and stronger, and SPR is ~5. Solvers c-bet near 90%+ at 33% pot on dry boards in this configuration."
+    },
+    {
+      "id": "tex-4",
+      "type": "truefalse",
+      "concept": "Caller-favoured boards",
+      "prompt": "On a 6♠ 5♥ 4♣ flop in a single-raised pot, the preflop raiser should usually c-bet at high frequency to put pressure on the caller.",
+      "answer": false,
+      "explanation": "The caller's range crushes 6-5-4 — they have many sets, two-pairs, and straights. The raiser's overcards are often dominated. Check most of the range here."
+    },
+    {
+      "id": "tex-5",
+      "type": "multi",
+      "concept": "Texture inputs",
+      "prompt": "Which board features should drive your c-bet sizing decision? Select all that apply.",
+      "choices": [
+        { "id": "a", "text": "Connectivity (gappy vs straightforward)." },
+        { "id": "b", "text": "Suitedness (rainbow / two-tone / monotone)." },
+        { "id": "c", "text": "Pairing (paired vs unpaired)." },
+        { "id": "d", "text": "Whether the pot is single-raised or 3-bet." },
+        { "id": "e", "text": "The colour of the chips you used preflop." }
+      ],
+      "answer": ["a", "b", "c", "d"],
+      "explanation": "Connectivity, suitedness, pairing, and pot type are the four axes. Chip colour is irrelevant — never trust ‘flow’ explanations over board structure."
+    },
+    {
+      "id": "tex-6",
+      "type": "choice",
+      "concept": "Wet boards",
+      "prompt": "On a wet middling board (e.g. 9♣ 8♥ 7♦) where the preflop caller has a slight nut advantage, the appropriate c-bet posture is:",
+      "choices": [
+        { "id": "a", "text": "C-bet 100% at 33% pot — the raiser still has range advantage." },
+        { "id": "b", "text": "Use a polarised 50–75% pot bet at lower frequency, mixed with checks." },
+        { "id": "c", "text": "Always check — there is no reason to bet on this texture." },
+        { "id": "d", "text": "Overbet small with junk hands and bluffs only." }
+      ],
+      "answer": "b",
+      "explanation": "Wet textures with marginal nut advantage call for a polarised 50–75% sizing at moderate frequency. Pure checking gives up too much; small range-bets get raised by the caller's strong made hands."
+    }
+  ]
+}

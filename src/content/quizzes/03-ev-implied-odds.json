@@ -1,0 +1,72 @@
+{
+  "title": "EV, implied odds, semi-bluffs",
+  "description": "Six questions on multi-street decisions and the EV calculus that supports them.",
+  "questions": [
+    {
+      "id": "ev-1",
+      "type": "numeric",
+      "concept": "River bluff EV",
+      "prompt": "Pot is 100bb. You bluff 50bb on the river with zero equity if called. Villain folds 30% of the time. What is the EV of the bluff (in bb)?",
+      "answer": -5,
+      "tolerance": 0.5,
+      "unit": "bb",
+      "explanation": "EV = 0.30 · 100 + 0.70 · (-50) = 30 - 35 = -5bb. α here is 50/150 ≈ 33.3%, so a 30% fold rate falls short and the bluff loses on average."
+    },
+    {
+      "id": "ev-2",
+      "type": "numeric",
+      "concept": "Semi-bluff EV",
+      "prompt": "Pot is 10bb, you bet 7bb with a flush draw. Villain folds 35% and when called you have 35% equity. What is the approximate EV (in bb, 1 decimal)?",
+      "answer": 4.4,
+      "tolerance": 0.3,
+      "unit": "bb",
+      "explanation": "Fold leg: 0.35 · 10 = 3.5. Call leg: 0.65 · (0.35 · 17 - 0.65 · 7) = 0.65 · 1.4 = 0.91. Total ≈ 4.4bb. Semi-bluffs combine fold and showdown EV."
+    },
+    {
+      "id": "ev-3",
+      "type": "choice",
+      "concept": "EV decomposition",
+      "prompt": "Why is a semi-bluff often profitable when villain folds far less than α?",
+      "choices": [
+        { "id": "a", "text": "Because fold equity does not factor into a semi-bluff's EV." },
+        { "id": "b", "text": "Because showdown equity provides a second source of EV that compounds with whatever folds you do generate." },
+        { "id": "c", "text": "Because villain is forced to call any draw." },
+        { "id": "d", "text": "Because semi-bluffs do not risk chips when called." }
+      ],
+      "answer": "b",
+      "explanation": "α is derived for *zero-equity* bluffs. With showdown equity in the mix, the call leg also produces positive EV, lowering the fold rate required to break even."
+    },
+    {
+      "id": "ev-4",
+      "type": "numeric",
+      "concept": "Implied odds",
+      "prompt": "Turn: pot 50bb, villain bets 50bb. You have a draw with 18% equity. What is the break-even additional X (in bb, integer)?",
+      "answer": 178,
+      "tolerance": 5,
+      "unit": "bb",
+      "explanation": "X = (C - eq · (P + C)) / eq = (50 - 0.18·100) / 0.18 = 32 / 0.18 ≈ 178bb. With 100bb stacks behind, this is unrealistic — the call is bad."
+    },
+    {
+      "id": "ev-5",
+      "type": "truefalse",
+      "concept": "Reverse implied odds",
+      "prompt": "When chasing a non-nut flush draw against a tight player, you should still apply your full implied odds — the formula doesn't care which suit you hold.",
+      "answer": false,
+      "explanation": "Non-nut draws are the textbook reverse-implied-odds spot: when you hit and bet, villain often holds the higher draw and raises; when you miss, you lose minimally. Discount implied odds heavily — sometimes to zero or negative."
+    },
+    {
+      "id": "ev-6",
+      "type": "choice",
+      "concept": "Implied odds applicability",
+      "prompt": "Which scenario has the LEAST useful implied odds?",
+      "choices": [
+        { "id": "a", "text": "100bb effective, opponent bets 50% pot on the turn — pot 50, bet 25." },
+        { "id": "b", "text": "All-in on the turn — no chips remain behind." },
+        { "id": "c", "text": "Deep-stacked (250bb), opponent bets pot on the flop." },
+        { "id": "d", "text": "200bb stacks against a calling station who never folds postflop." }
+      ],
+      "answer": "b",
+      "explanation": "Implied odds depend on winning *future* money. When the bet is all-in, there is no future money to be won and the X term collapses to zero — only naked pot odds apply."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "title": "Position & equity realisation",
+  "description": "Five questions on EQR and OOP strategy.",
+  "questions": [
+    {
+      "id": "pos-1",
+      "type": "choice",
+      "concept": "EQR ranges",
+      "prompt": "Approximately what range does solver work assign to EQR for an in-position player?",
+      "choices": [
+        { "id": "a", "text": "60–70%" },
+        { "id": "b", "text": "80–95%" },
+        { "id": "c", "text": "105–120%" },
+        { "id": "d", "text": "150–175%" }
+      ],
+      "answer": "c",
+      "explanation": "IP players realise ~105–120% of their raw equity. OOP players realise ~80–95%. The ~10–25% gap is the structural value of position."
+    },
+    {
+      "id": "pos-2",
+      "type": "truefalse",
+      "concept": "EQR practical impact",
+      "prompt": "A hand with 35% raw equity IP often outperforms the same hand with 35% raw equity OOP because of equity realisation.",
+      "answer": true,
+      "explanation": "EQR IP > 100% turns 35% raw equity into ~40% effective; EQR OOP < 100% turns it into ~30%. That gap flips many borderline decisions."
+    },
+    {
+      "id": "pos-3",
+      "type": "multi",
+      "concept": "OOP playbook",
+      "prompt": "Which strategic adjustments should an OOP player make? Select all that apply.",
+      "choices": [
+        { "id": "a", "text": "Check more often, especially on dynamic textures." },
+        { "id": "b", "text": "Use smaller sizings to keep the pot manageable." },
+        { "id": "c", "text": "Use the check-raise as a primary aggression vehicle." },
+        { "id": "d", "text": "C-bet at the same frequency as IP because the math is identical." },
+        { "id": "e", "text": "Float wider on the flop to build big pots." }
+      ],
+      "answer": ["a", "b", "c"],
+      "explanation": "OOP should check more, size smaller, and rely on check-raises. C-bet frequency drops OOP because there's no information advantage; floating wider OOP is a leak."
+    },
+    {
+      "id": "pos-4",
+      "type": "choice",
+      "concept": "EQR mechanism",
+      "prompt": "Which of the following is NOT a reason IP players realise more equity than OOP players?",
+      "choices": [
+        { "id": "a", "text": "IP players see villain's action before deciding." },
+        { "id": "b", "text": "IP players can take free cards by checking back." },
+        { "id": "c", "text": "IP players are dealt stronger starting hands." },
+        { "id": "d", "text": "OOP players must commit chips before knowing villain's plan." }
+      ],
+      "answer": "c",
+      "explanation": "Cards are random — position doesn't change starting-hand strength. The information advantage and the option to check back are the real mechanisms."
+    },
+    {
+      "id": "pos-5",
+      "type": "choice",
+      "concept": "Application",
+      "prompt": "You hold JTs in the SB facing a BTN open. The chart says JTs is a 3-bet rather than a flat-call. The most likely reason is:",
+      "choices": [
+        { "id": "a", "text": "JTs is too strong for a flat-call OOP." },
+        { "id": "b", "text": "Flatting OOP would force you to realise reduced EQR; 3-betting takes initiative and often wins preflop." },
+        { "id": "c", "text": "JTs blocks AKo, AQo, and KQs strongly." },
+        { "id": "d", "text": "Flat-calling is forbidden from the SB." }
+      ],
+      "answer": "b",
+      "explanation": "OOP cold-calls take a heavy EQR penalty. A 3-bet bypasses postflop play more often (preflop fold equity) and builds a low-SPR pot when called. JTs's modest blocker effect is a side benefit, not the main reason."
+    }
+  ]
+}

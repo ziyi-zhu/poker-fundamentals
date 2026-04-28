@@ -1,0 +1,62 @@
+{
+  "title": "River bluff-to-value ratios",
+  "description": "Five questions on the indifference principle and the optimal bluff fraction.",
+  "questions": [
+    {
+      "id": "ratio-1",
+      "type": "numeric",
+      "concept": "GTO bluff fraction",
+      "prompt": "Pot 50bb, river bet 50bb. What is the GTO bluff fraction (in %, 1 decimal)?",
+      "answer": 33.3,
+      "tolerance": 0.5,
+      "unit": "%",
+      "explanation": "b = B / (P + 2B) = 50 / (50 + 100) = 33.3%. For a pot-sized river bet, ~1/3 of the betting range should be bluffs, ~2/3 value."
+    },
+    {
+      "id": "ratio-2",
+      "type": "numeric",
+      "concept": "GTO bluff fraction",
+      "prompt": "For a 1/2-pot river bet, the bluff:value ratio is 1:3. What share of the bets should be bluffs (in %, integer)?",
+      "answer": 25,
+      "tolerance": 1,
+      "unit": "%",
+      "explanation": "Bluffs / (Bluffs + Value) = 1 / 4 = 25%. The smaller the bet, the smaller the bluff share — small bets give villain great odds, so you can threaten less often."
+    },
+    {
+      "id": "ratio-3",
+      "type": "choice",
+      "concept": "Indifference",
+      "prompt": "What does the indifference condition aim to make true?",
+      "choices": [
+        { "id": "a", "text": "The bluffer's EV when called equals the EV when folded." },
+        { "id": "b", "text": "The defender is indifferent between calling and folding because both have EV = 0 against the betting range." },
+        { "id": "c", "text": "The defender's call wins exactly the bet size." },
+        { "id": "d", "text": "Both players have the same hand strength on average." }
+      ],
+      "answer": "b",
+      "explanation": "Indifference: defender's call has EV = 0 against the betting range, so they cannot exploit you by deviating. This is the GTO equilibrium for the river."
+    },
+    {
+      "id": "ratio-4",
+      "type": "truefalse",
+      "concept": "Microstakes deviation",
+      "prompt": "Against a microstakes calling station, you should still bluff at the GTO ratio — anything else is exploitable.",
+      "answer": false,
+      "explanation": "GTO ratios are an unexploitable baseline; against under-folding opponents you should bluff *less* than GTO — often near zero. Their call rate already exceeds α, so any bluff is -EV."
+    },
+    {
+      "id": "ratio-5",
+      "type": "multi",
+      "concept": "Earlier streets",
+      "prompt": "Why do the river bluff:value ratios not apply directly to flop or turn betting? Select all that apply.",
+      "choices": [
+        { "id": "a", "text": "On earlier streets, 'bluffs' are usually semi-bluffs with showdown equity." },
+        { "id": "b", "text": "The pot will continue to be wagered on later streets, complicating the EV calculation." },
+        { "id": "c", "text": "There is no β formula for earlier streets — only α." },
+        { "id": "d", "text": "Solver outputs show different value/bluff ratios at flop, turn, and river." }
+      ],
+      "answer": ["a", "b", "d"],
+      "explanation": "Semi-bluffs and future betting both shift the math. Solvers show ~1/3 value on the flop, ~1/2 on the turn, ~2/3 on the river. The α formula does still apply — it's just not the whole story."
+    }
+  ]
+}

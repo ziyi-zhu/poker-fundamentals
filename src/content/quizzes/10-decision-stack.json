@@ -1,0 +1,70 @@
+{
+  "title": "The decision stack",
+  "description": "Five questions to verify you can compose all ten parts.",
+  "questions": [
+    {
+      "id": "stack-1",
+      "type": "choice",
+      "concept": "Cascade order",
+      "prompt": "On the flop, which check should you do FIRST in the decision cascade?",
+      "choices": [
+        { "id": "a", "text": "Apply the by-worse criterion." },
+        { "id": "b", "text": "Compute SPR." },
+        { "id": "c", "text": "Build a polarised river range." },
+        { "id": "d", "text": "Compute α." }
+      ],
+      "answer": "b",
+      "explanation": "SPR is the structural input that governs commitment. Compute it once at the start of the flop; everything else (texture, sizing, stack-off plan) depends on it."
+    },
+    {
+      "id": "stack-2",
+      "type": "choice",
+      "concept": "Turn re-evaluation",
+      "prompt": "The turn brings a flush card on a board where you previously had range advantage. Which adjustment is most likely correct?",
+      "choices": [
+        { "id": "a", "text": "Continue betting at the same frequency — flush cards don't matter." },
+        { "id": "b", "text": "Slow down on hands that don't have the flush; villain's range shifted toward more flushes and bluff-catchers." },
+        { "id": "c", "text": "Always overbet to bluff villain off the flush." },
+        { "id": "d", "text": "Always check-fold." }
+      ],
+      "answer": "b",
+      "explanation": "Scare cards rebalance both ranges. Slow down with hands that don't make the new draw, and choose your bluff candidates from hands that block villain's strongest continues."
+    },
+    {
+      "id": "stack-3",
+      "type": "truefalse",
+      "concept": "River bluff at micros",
+      "prompt": "On the river against a calling station, you should still aim for the GTO bluff:value ratio so as not to be exploitable.",
+      "answer": false,
+      "explanation": "The GTO ratio is unexploitable. Against a station who under-folds, bluffs lose money — drop the bluff frequency below GTO, often to zero."
+    },
+    {
+      "id": "stack-4",
+      "type": "multi",
+      "concept": "Synthesis",
+      "prompt": "When facing a 3/4-pot bet on the river with a bluff-catcher, which inputs should you weigh? Select all that apply.",
+      "choices": [
+        { "id": "a", "text": "Pot odds — what equity do I need to call?" },
+        { "id": "b", "text": "Player type — does villain bluff at GTO frequency?" },
+        { "id": "c", "text": "Blockers — does my hand block villain's value range?" },
+        { "id": "d", "text": "What suit my chips are." }
+      ],
+      "answer": ["a", "b", "c"],
+      "explanation": "Pot odds, opponent tendency, and blockers are the three inputs. Chip suit is irrelevant. Note that MDF is *not* on the list — it's a theoretical floor, not a calling threshold."
+    },
+    {
+      "id": "stack-5",
+      "type": "choice",
+      "concept": "Heuristic priority",
+      "prompt": "When two parts of the curriculum disagree (e.g. MDF says call, by-worse criterion says fold), which framework wins?",
+      "choices": [
+        { "id": "a", "text": "Always MDF — it's the GTO baseline." },
+        { "id": "b", "text": "Whichever framework matches an explicit EV calculation against villain's range." },
+        { "id": "c", "text": "Always by-worse criterion." },
+        { "id": "d", "text": "Whichever the chart says." }
+      ],
+      "answer": "b",
+      "explanation": "EV is the parent quantity. MDF, pot odds, by-worse and α are all derivations under different assumptions. When they conflict, recompute EV against the actual villain range and follow the answer."
+    }
+  ]
+}
