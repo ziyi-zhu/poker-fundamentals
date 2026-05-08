@@ -1,0 +1,19 @@
+# Build artefacts and generated files
+.next/
+out/
+build/
+dist/
+coverage/
+node_modules/
+
+# Lockfiles (npm reformats these on install)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated TypeScript declarations
+next-env.d.ts
+
+# Lesson content is hand-formatted (tables, math) — leave it alone
+src/content/
+public/

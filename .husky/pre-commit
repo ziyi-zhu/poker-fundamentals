@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+# Format + lint staged files (auto-fix where possible), then run a full
+# project type-check. Type-checking is unstaged-aware on purpose: TypeScript
+# can only verify correctness across the whole graph, not file-by-file.
+set -e
+
+npx --no-install lint-staged
+npm run typecheck --silent

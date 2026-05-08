@@ -1,3 +1,9 @@
+## First, range thinking
+
+GTO reasons about your *whole strategy* in a spot, not the one hand you happen to hold. Your **betting range** is the set of every hand combo you'd bet with here, pooled across all the different holdings you could have arrived with. The hand in front of you right now is one combo inside that range; "bluff frequency" and "value frequency" are properties of the range, not of any single hand. 
+
+When we say "bluff 33% of the time," it means *33% of the combos in your betting range are bluffs*, not that you flip a coin with the hand you're holding.
+
 ## On the river, every bet is value or bluff
 
 By the river, no more cards are coming. Every hand in your betting range is unambiguously one of two things:
@@ -20,12 +26,6 @@ Setting the expected value of calling to zero:
 
 $$
 \frac{B_c}{V + B_c} \cdot (P + B) - \frac{V}{V + B_c} \cdot B = 0
-$$
-
-Multiplying through by $V + B_c$:
-
-$$
-B_c (P + B) = V B
 $$
 
 Solving for the bluff fraction $b = B_c / (V + B_c)$:
@@ -91,6 +91,8 @@ $$
 B_c = b \cdot (V + B_c) \quad \Rightarrow \quad B_c = \frac{b}{1 - b} \cdot V = \frac{1/3}{2/3} \cdot 6 = 3
 $$
 
-So 3 bluff combos for 6 value combos — a 1 : 2 ratio. Pick the bluffs that **block** villain's calling range (e.g. hands containing the ace of the suit on a flush board, removing nut-flush combos from villain) and **unblock** villain's folding range.
+So 3 bluff combos for 6 value combos — a 1 : 2 ratio.
+
+"Picking" bluffs is a *strategy-construction* decision, not a per-hand action: at the table your hand is whatever it is, but your overall plan must specify which bluff candidates in your range get bet and which get checked. From the pool of plausible bluff candidates you'd reach this spot with, choose the combos that **block** villain's calling range (e.g. hands containing the ace of the suit on a flush board, removing nut-flush combos from villain) and **unblock** villain's folding range. Then, when you're actually dealt one of those combos, you bet it; when you're dealt a non-chosen candidate, you check it.
 
 > **Block / unblock heuristic.** Your best bluff candidates remove villain's strong continues from the deck. Your worst bluff candidates contain cards villain needs to call.

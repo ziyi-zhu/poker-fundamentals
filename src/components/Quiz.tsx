@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/cn";
 import type {
   ChoiceQuestion,
@@ -11,15 +11,24 @@ import type {
 } from "@/lib/quiz";
 import { InlineMath } from "@/components/InlineMath";
 
-type QuestionState =
-  | { status: "unanswered" }
-  | { status: "answered"; correct: boolean };
+type QuestionState = { status: "unanswered" } | { status: "answered"; correct: boolean };
 
 type Answer =
   | { type: "choice"; value: string }
   | { type: "multi"; value: string[] }
   | { type: "numeric"; value: number | null }
   | { type: "truefalse"; value: boolean | null };
+
+const STORAGE_PREFIX = "pf:quiz:";
+// Bump when the persisted shape changes in a backwards-incompatible way.
+const STORAGE_VERSION = 1;
+
+type PersistedQuiz = {
+  v: number;
+  ids: string[];
+  answers: Answer[];
+  states: QuestionState[];
+};
 
 function emptyAnswer(question: QuizQuestion): Answer {
   switch (question.type) {
@@ -68,11 +77,89 @@ function isCorrect(question: QuizQuestion, answer: Answer): boolean {
   }
 }
 
-export function Quiz({ quiz }: { quiz: QuizType }) {
+export function Quiz({ quiz, slug }: { quiz: QuizType; slug: string }) {
   const [answers, setAnswers] = useState<Answer[]>(() => quiz.questions.map(emptyAnswer));
   const [states, setStates] = useState<QuestionState[]>(() =>
     quiz.questions.map(() => ({ status: "unanswered" })),
   );
+  // Effects below need a stable reference to the question id list to detect
+  // when a stored payload no longer matches the current quiz shape.
+  const questionIds = useMemo(() => quiz.questions.map((q) => q.id), [quiz.questions]);
+  const storageKey = `${STORAGE_PREFIX}${slug}`;
+  // `hydrated` MUST be state, not a ref. If it were a ref, the persist effect
+  // would fire on the same commit as the hydrate effect with the *old* empty
+  // answers/states closure and overwrite the saved payload before the loaded
+  // state had a chance to render. Promoting it to state defers the persist
+  // effect until React has committed the loaded values together with
+  // `hydrated = true`.
+  const [hydrated, setHydrated] = useState(false);
+
+  // Reset hydration when the storage key changes so a remounted component
+  // (e.g. fast client-side navigation between lessons) re-reads the new key
+  // before persisting anything.
+  //
+  // The setState-in-effect calls below are an intentional, React-docs-endorsed
+  // pattern for hydrating client-only state (localStorage) after SSR. The
+  // canonical alternative (`useSyncExternalStore`) requires a stable subscribe
+  // mechanism and is significantly more boilerplate for one-shot per-instance
+  // reads — see ThemeToggle.tsx for the cross-cutting use case where it does
+  // pay off.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(false);
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw) {
+        const parsed = JSON.parse(raw) as PersistedQuiz;
+        if (
+          parsed?.v === STORAGE_VERSION &&
+          Array.isArray(parsed.ids) &&
+          parsed.ids.length === questionIds.length &&
+          parsed.ids.every((id, i) => id === questionIds[i]) &&
+          Array.isArray(parsed.answers) &&
+          parsed.answers.length === questionIds.length &&
+          Array.isArray(parsed.states) &&
+          parsed.states.length === questionIds.length
+        ) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect
+          setAnswers(parsed.answers);
+          setStates(parsed.states);
+        } else {
+          // Stale or malformed payload (quiz changed shape, etc.) — drop it.
+          window.localStorage.removeItem(storageKey);
+          setAnswers(quiz.questions.map(emptyAnswer));
+          setStates(quiz.questions.map(() => ({ status: "unanswered" })));
+        }
+      } else {
+        // No saved payload for this lesson — start fresh, even if we were
+        // previously displaying state for another lesson.
+        setAnswers(quiz.questions.map(emptyAnswer));
+        setStates(quiz.questions.map(() => ({ status: "unanswered" })));
+      }
+    } catch {
+      // Ignore storage errors (quota, disabled storage, etc.).
+    }
+    setHydrated(true);
+  }, [storageKey, questionIds, quiz.questions]);
+
+  useEffect(() => {
+    if (!hydrated || typeof window === "undefined") return;
+    try {
+      const payload: PersistedQuiz = {
+        v: STORAGE_VERSION,
+        ids: questionIds,
+        answers,
+        states,
+      };
+      window.localStorage.setItem(storageKey, JSON.stringify(payload));
+    } catch {
+      // Ignore storage errors.
+    }
+  }, [answers, states, storageKey, questionIds, hydrated]);
 
   const score = useMemo(
     () => states.reduce((acc, s) => (s.status === "answered" && s.correct ? acc + 1 : acc), 0),
@@ -101,6 +188,13 @@ export function Quiz({ quiz }: { quiz: QuizType }) {
   function resetAll() {
     setAnswers(quiz.questions.map(emptyAnswer));
     setStates(quiz.questions.map(() => ({ status: "unanswered" })));
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.removeItem(storageKey);
+      } catch {
+        // Ignore storage errors.
+      }
+    }
   }
 
   return (
@@ -113,13 +207,9 @@ export function Quiz({ quiz }: { quiz: QuizType }) {
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
             Check your understanding
           </p>
-          <h2 className="mt-1 text-xl font-semibold tracking-tight sm:text-2xl">
-            {quiz.title}
-          </h2>
+          <h2 className="mt-1 text-xl font-semibold tracking-tight sm:text-2xl">{quiz.title}</h2>
           {quiz.description ? (
-            <p className="mt-1.5 max-w-xl text-sm text-[var(--color-muted)]">
-              {quiz.description}
-            </p>
+            <p className="mt-1.5 max-w-xl text-sm text-[var(--color-muted)]">{quiz.description}</p>
           ) : null}
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
@@ -430,7 +520,14 @@ function MultiSelectInput(props: {
               )}
             >
               {selected ? (
-                <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  viewBox="0 0 12 12"
+                  width="10"
+                  height="10"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M2.5 6.5l2.5 2.5L9.5 4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               ) : null}

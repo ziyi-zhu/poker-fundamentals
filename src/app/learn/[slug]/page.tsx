@@ -7,16 +7,13 @@ import { Markdown } from "@/components/Markdown";
 import { LessonNav } from "@/components/LessonNav";
 import { Quiz } from "@/components/Quiz";
 import { Container } from "@/components/Container";
+import { CopyMarkdownButton } from "@/components/CopyMarkdownButton";
 
 export async function generateStaticParams() {
   return LESSONS.map((l) => ({ slug: l.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const lesson = getLessonBySlug(slug);
   if (!lesson) return {};
@@ -26,16 +23,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function LessonPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function LessonPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const lesson = getLessonBySlug(slug);
   if (!lesson) notFound();
 
-  const [{ html, toc }, quiz] = await Promise.all([
+  const [{ html, toc, raw }, quiz] = await Promise.all([
     loadLessonMarkdown(lesson.contentFile),
     loadQuiz(lesson.quizFile),
   ]);
@@ -55,13 +48,16 @@ export default async function LessonPage({
               <LessonNav activeSlug={lesson.slug} />
             </div>
 
-            <nav className="mb-3 text-xs text-[var(--color-muted)]">
-              <Link href="/learn" className="hover:text-[var(--color-foreground)]">
-                Curriculum
-              </Link>
-              <span className="mx-1.5 opacity-50">/</span>
-              <span>{lesson.partLabel}</span>
-            </nav>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <nav className="text-xs text-[var(--color-muted)]">
+                <Link href="/learn" className="hover:text-[var(--color-foreground)]">
+                  Curriculum
+                </Link>
+                <span className="mx-1.5 opacity-50">/</span>
+                <span>{lesson.partLabel}</span>
+              </nav>
+              <CopyMarkdownButton content={raw} />
+            </div>
 
             <header className="mb-8 border-b border-[var(--color-border)] pb-7">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
@@ -116,7 +112,7 @@ export default async function LessonPage({
 
             <Markdown html={html} />
 
-            <Quiz quiz={quiz} />
+            <Quiz quiz={quiz} slug={lesson.slug} />
 
             <nav className="mt-12 grid gap-3 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2 sm:gap-4">
               {previous ? (
