@@ -17,12 +17,29 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Poker Fundamentals — A technical curriculum",
-    template: "%s · Poker Fundamentals",
+    default: "The Poker Primer — A technical curriculum",
+    template: "%s · The Poker Primer",
   },
   description:
     "A rigorous, math-first curriculum for microstakes No-Limit Hold'em. Ten parts, worked examples, and quizzes after every section.",
-  metadataBase: new URL("https://poker-fundamentals.local"),
+  metadataBase: new URL("https://the-poker-primer.local"),
+  icons: {
+    icon: [
+      { url: "/favicons/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicons/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicons/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/favicons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: ["/favicons/favicon.ico"],
+  },
+  manifest: "/favicons/site.webmanifest",
+  appleWebApp: {
+    title: "The Poker Primer",
+    capable: true,
+    statusBarStyle: "default",
+  },
 };
 
 export default function RootLayout({

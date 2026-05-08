@@ -1,4 +1,4 @@
-# Poker Fundamentals — A technical curriculum
+# The Poker Primer — A technical curriculum
 
 A math-first learning website for microstakes No-Limit Hold&apos;em, built from a study guide on the four core betting formulas, GTO ranges, and exploitative play.
 

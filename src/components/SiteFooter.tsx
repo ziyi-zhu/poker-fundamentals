@@ -35,7 +35,7 @@ export function SiteFooter() {
             </Link>
           </div>
           <p className="text-xs text-[var(--color-muted)]">
-            © {new Date().getFullYear()} Poker Fundamentals · Built with Next.js
+            © {new Date().getFullYear()} The Poker Primer · Built with Next.js
             and Tailwind.
           </p>
         </nav>

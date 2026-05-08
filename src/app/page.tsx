@@ -43,11 +43,6 @@ export default function Home() {
                 Browse the curriculum
               </Link>
             </div>
-            <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-[var(--color-border)] pt-6 text-sm">
-              <Stat label="Lessons" value={String(LESSONS.length)} />
-              <Stat label="Worked examples" value="40+" />
-              <Stat label="Quiz questions" value="60+" />
-            </dl>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -181,17 +176,6 @@ export default function Home() {
         </Container>
       </section>
     </main>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="text-xs uppercase tracking-wide text-[var(--color-muted)]">
-        {label}
-      </dt>
-      <dd className="mt-0.5 font-mono text-xl font-semibold">{value}</dd>
-    </div>
   );
 }
 
